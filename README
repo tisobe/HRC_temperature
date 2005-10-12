@@ -1,0 +1,6 @@
+
+This set of scripts extract HRC temperature information from dataseeker database, and plot them.
+
+hrc_temperature_wrap_script
+hrc_temperature_main_script
+hrc_temperature_plot.perl
