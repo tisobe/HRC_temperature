@@ -6,4 +6,6 @@ source /home/mta/bin/reset_param
 setenv PFILES "${PDIRS}:${SYSPFILES}"
 set path = (/home/ascds/DS.release/bin/  $path)
 
+punlearn dataseeker
+
 perl /data/mta/MTA/bin/hrc_temperature_plot.perl
