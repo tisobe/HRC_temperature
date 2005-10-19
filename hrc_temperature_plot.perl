@@ -349,7 +349,7 @@ pgptxt($xmid, $ybot, 0.0, 0.0, "Time (DOM)");
 
 pgclos();
 
-$out_plot = '/data/mta_www/mta_hrc/Tranding/Temp_data/hrc_temp1.gif';
+$out_plot = '/data/mta_www/mta_hrc/Trending/Temp_data/hrc_temp1.gif';
 
 #system("echo ''|gs -sDEVICE=ppmraw  -r256x256 -q -NOPAUSE -sOutputFile=-  ./pgplot.ps|pnmcrop|pnmflip -r270 |ppmtogif > $out_plot");
 system("echo ''|gs -sDEVICE=ppmraw  -r256x256 -q -NOPAUSE -sOutputFile=-  ./pgplot.ps|pnmflip -r270 |ppmtogif > $out_plot");
@@ -502,13 +502,13 @@ pgptxt($xmid, $ybot, 0.0, 0.0, "Time (DOM)");
 pgclos();
 
 
-$out_plot = '/data/mta_www/mta_hrc/Tranding/Temp_data/hrc_temp2.gif';
+$out_plot = '/data/mta_www/mta_hrc/Trending/Temp_data/hrc_temp2.gif';
 
 #system("echo ''|gs -sDEVICE=ppmraw  -r256x256 -q -NOPAUSE -sOutputFile=-  ./pgplot.ps|pnmcrop|pnmflip -r270 |ppmtogif > $out_plot");
 system("echo ''|gs -sDEVICE=ppmraw  -r256x256 -q -NOPAUSE -sOutputFile=-  ./pgplot.ps|pnmflip -r270 |ppmtogif > $out_plot");
 system("rm pgplot.ps");
 
-open(OUT, '> /data/mta_www/mta_hrc/Tranding/hrc_temp.html');
+open(OUT, '> /data/mta_www/mta_hrc/Trending/hrc_temp.html');
 
 print OUT '<html>',"\n";
 print OUT '<head><title>HRC Temperature</title></head>',"\n";
