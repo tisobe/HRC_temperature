@@ -1,3 +1,5 @@
 source /home/mta/.ascrc
 
+mkdir param
+
 perl /data/mta/MTA/bin/hrc_temperature_plot.perl
