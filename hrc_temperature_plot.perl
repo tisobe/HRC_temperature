@@ -34,8 +34,9 @@ close(OUT);
 #--- call dataseeker
 #
 
-system("dataseeker.pl infile=ds_file print=yes outfile=hrc_temp.fits");
+system("punlearn dataseeker; dataseeker.pl infile=ds_file print=yes outfile=hrc_temp.fits");
 system("dmlist infile=\"hrc_temp.fits[cols time,2ceahvpt_avg,2chtrpzt_avg,2condmxt_avg,2dcentrt_avg,2dtstatt_avg,2fhtrmzt_avg,2fradpyt_avg,2pmt1t_avg,2pmt2t_avg,2uvlspxt_avg]\" outfile=hrc_temp.dat opt=data");
+system("rm ds_file  hrc_temp.fits");
 
 @time = ();
 @ceahvpt = ();
@@ -90,6 +91,7 @@ while(<FH>){
 	}
 }
 close(FH);
+system("rm hrc_temp.dat");
 
 @temp = sort{$a<=>$b} @time;
 $xmin = $temp[0];
@@ -351,6 +353,7 @@ $out_plot = '/data/mta_www/mta_hrc/Tranding/Temp_data/hrc_temp1.gif';
 
 #system("echo ''|gs -sDEVICE=ppmraw  -r256x256 -q -NOPAUSE -sOutputFile=-  ./pgplot.ps|pnmcrop|pnmflip -r270 |ppmtogif > $out_plot");
 system("echo ''|gs -sDEVICE=ppmraw  -r256x256 -q -NOPAUSE -sOutputFile=-  ./pgplot.ps|pnmflip -r270 |ppmtogif > $out_plot");
+system("rm pgplot.ps");
 
 #-----------------------------------------
 
@@ -503,30 +506,22 @@ $out_plot = '/data/mta_www/mta_hrc/Tranding/Temp_data/hrc_temp2.gif';
 
 #system("echo ''|gs -sDEVICE=ppmraw  -r256x256 -q -NOPAUSE -sOutputFile=-  ./pgplot.ps|pnmcrop|pnmflip -r270 |ppmtogif > $out_plot");
 system("echo ''|gs -sDEVICE=ppmraw  -r256x256 -q -NOPAUSE -sOutputFile=-  ./pgplot.ps|pnmflip -r270 |ppmtogif > $out_plot");
-
-
-#### system("rm ds_file memo pgplot.ps veto.fits sheild_events.dat");
+system("rm pgplot.ps");
 
 open(OUT, '> /data/mta_www/mta_hrc/Tranding/hrc_temp.html');
 
 print OUT '<html>',"\n";
-print OUT '<head><title>HRC SIB</title></head>',"\n";
+print OUT '<head><title>HRC Temperature</title></head>',"\n";
 print OUT '<body TEXT="#000000" BGCOLOR="#FFFFFF">',"\n";
 print OUT '<center>',"\n";
-print OUT '<h2>Time History of HRC Instrument Background </h2>',"\n";
+print OUT '<h2>Time History of HRC Temperature </h2>',"\n";
 print OUT '</center>',"\n";
 print OUT '',"\n";
 print OUT '<p>',"\n";
-print OUT 'The HRC background is dominated by the effects of charged particles',"\n";
-print OUT ' (see <a href="http://hea-www.harvard.edu/~juda/memos/hrc_bkg/time_history.html">memo by Juda</a>).',"\n";
-print OUT 'We extracted shield rates from <a href="http://cxc.harvard.edu/cgi-bin/DataSeeker/dataseeker.cgi">dataseeker</a>',"\n";
-print OUT "database, and plot agaist time. To avoid an effect of the Earth's radiaton belts, data with a geocentric","\n";
-print OUT 'distance larger than 80,000km is used. Although dataseeker data are logged in 5 min average, we convert it into',"\n";
-print OUT 'one day average. The shield rate is count/sec, and time unit is day starting at a launch date (DOM).',"\n";
-print OUT '</p>',"\n";
 print OUT '',"\n";
-print OUT '',"\n";
-print OUT '<img src ="./shiled_rate.gif" width="500" height="500">',"\n";
+print OUT '<img src ="./Temp_data/hrc_temp1.gif" width="800" height="800">',"\n";
+print OUT '<br>',"\n";
+print OUT '<img src ="./Temp_data/hrc_temp2.gif" width="800" height="800">',"\n";
 print OUT '',"\n";
 print OUT '<br><br>',"\n";
 print OUT '',"\n";
