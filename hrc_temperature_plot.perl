@@ -537,6 +537,30 @@ print OUT 'Last Update:',"$month/$umday/$year\n";
 
 close(OUT);
 
+#
+#---- update the main hrc trending page
+#
+
+open(FH, '/data/mta_www/mta_hrc/Trending/hrc_trend.html');
+open(OUT, '>./temp_out.html');
+
+$chk = 0;
+while(<FH>){
+        chomp $_;
+        if($_ =~ /Temperature Time Series Plots/ && $chk == 0){
+                print OUT '<li><a href = "#temperature">Temperature Time Series Plots</a>';
+                print OUT " (last update: $month-$umday-$year)\n";
+                $chk++;
+        }else{
+                print OUT "$_\n";
+        }
+}
+close(OUT);
+close(FH);
+
+system("mv ./temp_out.html /data/mta_www/mta_hrc/Trending/hrc_trend.html");
+
+
 
 
 ##########################################################################
