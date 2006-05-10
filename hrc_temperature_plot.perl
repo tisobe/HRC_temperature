@@ -3,7 +3,7 @@ use PGPLOT;
 
 #################################################################################################
 #												#
-#	find_shield_rate.perl: extract HRC shield rate as predicitons for HRC background rate	#
+#	hrc_temperature_plot.perl: HRC related temperature MSIDs were trended			#
 #												#
 #	author: t. isobe (tisobe@cfa.harvard.edu)						#
 #												#
