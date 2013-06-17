@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env /usr/local/bin/perl
 use PGPLOT;
 
 #################################################################################################
@@ -7,10 +7,11 @@ use PGPLOT;
 #												#
 #	author: t. isobe (tisobe@cfa.harvard.edu)						#
 #												#
-#	last update: Feb 05, 2013								#
+#	last update: Jun 05, 2013								#
 #												#
 #################################################################################################
 
+$house_keeping = '/data/mta/Script/HRC/house_keeping/';
 #
 #--- check whether this is a test case
 #
@@ -54,16 +55,16 @@ if($comp_test =~ /test/i){
 #--- call dataseeker
 #
 
-system("punlearn dataseeker; dataseeker.pl infile=ds_file print=yes outfile=hrc_temp.fits");
+system("punlearn dataseeker; dataseeker.pl infile=ds_file print=yes outfile=hrc_temp.fits loginFile=$house_keeping/loginfile");
 
 system("dmlist infile=\"hrc_temp.fits[cols time,2ceahvpt_avg,2chtrpzt_avg,2condmxt_avg,2dcentrt_avg,2dtstatt_avg,2fhtrmzt_avg,2fradpyt_avg,2pmt1t_avg,2pmt2t_avg,2uvlspxt_avg]\" outfile=hrc_temp.dat opt=data");
 
 if($comp_test =~ /test/i){
 	system("mv hrc_temp.fits $test_out");
 	system("gzip $test_out/hrc_temp.fits");
-	system("rm ds_file");
+	system("rm -rf ds_file");
 }else{
-	system("rm ds_file  hrc_temp.fits");
+	system("rm -rf ds_file  hrc_temp.fits");
 }
 
 @time = ();
@@ -110,7 +111,7 @@ close(FH);
 if($comp_test =~ /test/i){
 	system("mv hrc_temp.dat $test_out");
 }else{
-	system("rm hrc_temp.dat");
+	system("rm -rf hrc_temp.dat");
 }
 
 @temp = sort{$a<=>$b} @time;
@@ -380,9 +381,8 @@ if($comp_test =~ /test/i){
 	$out_plot = '/data/mta_www/mta_hrc/Trending/Temp_data/hrc_temp1.gif';
 }
 
-#system("echo ''|/opt/local/bin/gs -sDEVICE=ppmraw  -r256x256 -q -NOPAUSE -sOutputFile=-  ./pgplot.ps|pnmcrop|pnmflip -r270 |ppmtogif > $out_plot");
-system("echo ''|/opt/local/bin/gs -sDEVICE=ppmraw  -r256x256 -q -NOPAUSE -sOutputFile=-  ./pgplot.ps|pnmflip -r270 |ppmtogif > $out_plot");
-system("rm pgplot.ps");
+system("echo ''|gs -sDEVICE=ppmraw  -r256x256 -q -NOPAUSE -sOutputFile=-  ./pgplot.ps|pnmflip -r270 |ppmtogif > $out_plot");
+system("rm -rf pgplot.ps");
 
 #-----------------------------------------
 
@@ -537,9 +537,8 @@ if($comp_test =~ /test/i){
 	$out_plot = '/data/mta_www/mta_hrc/Trending/Temp_data/hrc_temp2.gif';
 }
 
-#system("echo ''|/opt/local/bin/gs -sDEVICE=ppmraw  -r256x256 -q -NOPAUSE -sOutputFile=-  ./pgplot.ps|pnmcrop|pnmflip -r270 |ppmtogif > $out_plot");
-system("echo ''|/opt/local/bin/gs -sDEVICE=ppmraw  -r256x256 -q -NOPAUSE -sOutputFile=-  ./pgplot.ps|pnmflip -r270 |ppmtogif > $out_plot");
-system("rm pgplot.ps");
+system("echo ''|gs -sDEVICE=ppmraw  -r256x256 -q -NOPAUSE -sOutputFile=-  ./pgplot.ps|pnmflip -r270 |ppmtogif > $out_plot");
+system("rm -rf pgplot.ps");
 
 open(OUT, '> /data/mta_www/mta_hrc/Trending/hrc_temp.html');
 
@@ -622,5 +621,3 @@ sub plot_fig{
 		pgpt(1, $day[$m], $avg[$m], $symbol);
 	}
 }
-
-
