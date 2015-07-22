@@ -7,7 +7,7 @@ use PGPLOT;
 #												#
 #	author: t. isobe (tisobe@cfa.harvard.edu)						#
 #												#
-#	last update: Jun 05, 2013								#
+#	last update: May 12, 2014								#
 #												#
 #################################################################################################
 
@@ -590,24 +590,24 @@ close(OUT);
 #---- update the main hrc trending page
 #
 
-open(FH, '/data/mta_www/mta_hrc/Trending/hrc_trend.html');
-open(OUT, '>./temp_out.html');
-
-$chk = 0;
-while(<FH>){
-        chomp $_;
-        if($_ =~ /Temperature Time Series Plots/ && $chk == 0){
-                print OUT '<li style="font-size:105%;font-weight:bold"><a href = "#temperature">Temperature Time Series Plots</a>';
-                print OUT " (last update: $month-$umday-$year)\n";
-                $chk++;
-        }else{
-                print OUT "$_\n";
-        }
-}
-close(OUT);
-close(FH);
-
-system("mv ./temp_out.html /data/mta_www/mta_hrc/Trending/hrc_trend.html");
+#open(FH, '/data/mta_www/mta_hrc/Trending/hrc_trend.html');
+#open(OUT, '>./temp_out.html');
+#
+#$chk = 0;
+#while(<FH>){
+#        chomp $_;
+#        if($_ =~ /Temperature Time Series Plots/ && $chk == 0){
+#                print OUT '<li style="font-size:105%;font-weight:bold"><a href = "#temperature">Temperature Time Series Plots</a>';
+#                print OUT " (last update: $month-$umday-$year)\n";
+#                $chk++;
+#        }else{
+#                print OUT "$_\n";
+#        }
+#}
+#close(OUT);
+#close(FH);
+#
+#system("mv ./temp_out.html /data/mta_www/mta_hrc/Trending/hrc_trend.html");
 
 
 
